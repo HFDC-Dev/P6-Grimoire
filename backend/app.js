@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -9,14 +11,21 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/books', (req, res, next) => {
+app.post('/api/books', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({
+        message: 'Livre crée !'
+    })
+});
+
+app.get('/api/books', (req, res, next) => {
     const stuff = [
         {
             _id: 'oeihfzeoi',
             title: 'Mon premier livre',
             author: 'Jean Dupont',
             year: 2010,
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
+            imageUrl: '',
             rating: 4.2,
             genre: 'Policier',
             userId: 'qsomihvqios',
@@ -26,7 +35,7 @@ app.use('/api/books', (req, res, next) => {
             title: 'Mon deuxième livre',
             author: 'Marie Durant',
             year: 2015,
-            imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
+            imageUrl: '',
             rating: 3.8,
             genre: 'Roman',
             userId: 'qsomihvqios',
