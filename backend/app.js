@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const Book = require('./models/books');
+
 const app = express();
 
 mongoose.connect('mongodb+srv://user_mdb:Poiuytreza@cluster0.jhhklgq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
@@ -20,37 +22,29 @@ app.use((req, res, next) => {
     next();
 });
 
+// Ajouter un livre
 app.post('/api/books', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({
-        message: 'Livre crée !'
-    })
+    delete req.body._id;
+    const book = new Book({
+        ...req.body
+    });
+    book.save()
+        .then(() => res.status(201).json({ message: 'Livre enregistré !' }))
+        .catch(error => res.status(400).json({ error }));
 });
 
+// Récupérer tous les livres
 app.get('/api/books', (req, res, next) => {
-    const stuff = [
-        {
-            _id: 'oeihfzeoi',
-            title: 'Mon premier livre',
-            author: 'Jean Dupont',
-            year: 2010,
-            imageUrl: '',
-            rating: 4.2,
-            genre: 'Policier',
-            userId: 'qsomihvqios',
-        },
-        {
-            _id: 'oeihfzeomoihi',
-            title: 'Mon deuxième livre',
-            author: 'Marie Durant',
-            year: 2015,
-            imageUrl: '',
-            rating: 3.8,
-            genre: 'Roman',
-            userId: 'qsomihvqios',
-        },
-    ];
-    res.status(200).json(stuff);
+    Book.find()
+        .then(books => res.status(200).json(books))
+        .catch(error => res.status(400).json({ error }));
+});
+
+// Récupérer un seul livre par ID
+app.get('/api/books/:id', (req, res, next) => {
+    Book.findOne({ _id: req.params.id })
+        .then(book => res.status(200).json(book))
+        .catch(error => res.status(404).json({ error }));
 });
 
 module.exports = app;
