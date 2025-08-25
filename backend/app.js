@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const Book = require('./models/books');
+const bookRoutes = require('./routes/books')
 
 const app = express();
 
@@ -22,29 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Ajouter un livre
-app.post('/api/books', (req, res, next) => {
-    delete req.body._id;
-    const book = new Book({
-        ...req.body
-    });
-    book.save()
-        .then(() => res.status(201).json({ message: 'Livre enregistré !' }))
-        .catch(error => res.status(400).json({ error }));
-});
+app.use('/api/books', bookRoutes)
 
-// Récupérer tous les livres
-app.get('/api/books', (req, res, next) => {
-    Book.find()
-        .then(books => res.status(200).json(books))
-        .catch(error => res.status(400).json({ error }));
-});
-
-// Récupérer un seul livre par ID
-app.get('/api/books/:id', (req, res, next) => {
-    Book.findOne({ _id: req.params.id })
-        .then(book => res.status(200).json(book))
-        .catch(error => res.status(404).json({ error }));
-});
 
 module.exports = app;
