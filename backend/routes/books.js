@@ -12,7 +12,7 @@ router.post('/', auth, bookCtrl.createBook);
 router.get('/', bookCtrl.getAllBooks);
 
 // Récupérer un seul livre par ID
-router.get('/:id', auth, bookCtrl.getOneBook);
+router.get('/:id', bookCtrl.getOneBook);
 
 
 
