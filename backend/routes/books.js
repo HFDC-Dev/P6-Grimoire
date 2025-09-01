@@ -1,12 +1,13 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const router = express.Router();
+const multer = require('../middleware/multer-config');
 
 
 const bookCtrl = require('../controllers/books')
 
 // Ajouter un livre
-router.post('/', auth, bookCtrl.createBook);
+router.post('/', auth, multer, bookCtrl.createBook);
 
 // Récupérer tous les livres
 router.get('/', bookCtrl.getAllBooks);
