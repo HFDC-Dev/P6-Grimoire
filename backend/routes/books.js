@@ -14,6 +14,12 @@ router.get('/', bookCtrl.getAllBooks);
 // Récupérer un seul livre par ID
 router.get('/:id', bookCtrl.getOneBook);
 
+//Modifier un livre
+router.put('/', bookCtrl.modifyBook);
+
+//Supprimer un livre
+router.delete('/', bookCtrl.deleteBook);
+
 
 
 module.exports = router;
