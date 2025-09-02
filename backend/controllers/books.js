@@ -1,19 +1,32 @@
 const Book = require('../models/books');
 const fs = require('fs');
+const sharp = require('sharp');
+const path = require('path');
 
-exports.createBook = (req, res, next) => {
-    const bookObject = JSON.parse(req.body.book);
-    delete bookObject._id;
-    delete bookObject._userId;
-    const book = new Book({
-        ...bookObject,
-        userId: req.auth.userId,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
+exports.createBook = async (req, res, next) => {
+    try {
+        const bookObject = JSON.parse(req.body.book);
+        delete bookObject._id;
+        delete bookObject._userId;
 
-    book.save()
-        .then(() => { res.status(201).json({ message: 'Livre enregistré !' }) })
-        .catch(error => { res.status(400).json({ error }) })
+        const filename = `${Date.now()}.webp`;
+
+        await sharp(req.file.buffer)
+            .resize(800)
+            .webp({ quality: 80 })
+            .toFile(path.join(__dirname, '../images', filename));
+
+        const book = new Book({
+            ...bookObject,
+            userId: req.auth.userId,
+            imageUrl: `${req.protocol}://${req.get('host')}/images/${filename}`
+        });
+
+        await book.save();
+        res.status(201).json({ message: 'Livre enregistré !' });
+    } catch (error) {
+        res.status(400).json({ error });
+    }
 };
 
 exports.getAllBooks = (req, res, next) => {
