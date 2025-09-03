@@ -12,6 +12,9 @@ router.post('/', auth, multer, bookCtrl.createBook);
 // Récupérer tous les livres
 router.get('/', bookCtrl.getAllBooks);
 
+// Récupérer les meilleurs livres
+router.get('/bestrating', bookCtrl.getBestRatedBooks);
+
 // Récupérer un seul livre par ID
 router.get('/:id', bookCtrl.getOneBook);
 
@@ -23,7 +26,6 @@ router.delete('/:id', auth, bookCtrl.deleteBook);
 
 // Ajoute la note à un livre
 router.post('/:id/rating', auth, bookCtrl.addRating);
-
 
 
 module.exports = router;
