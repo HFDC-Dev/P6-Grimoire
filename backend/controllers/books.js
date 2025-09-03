@@ -81,3 +81,24 @@ exports.deleteBook = (req, res, next) => {
             res.status(500).json({ error });
         });
 };
+
+exports.addRating = (req, res, next) => {
+    const grade = req.body.grade;
+
+    Book.findOne({ _id: req.params.id })
+        .then(book => {
+            if (!book) return res.status(404).json({ message: 'Livre non trouvé' });
+
+            const existingRating = book.ratings.find(r => r.userId === req.auth.userId);
+            if (existingRating) {
+                return res.status(400).json({ message: 'Vous avez déjà noté ce livre' });
+            }
+
+            book.ratings.push({ userId: req.auth.userId, grade });
+
+            return book.save()
+                .then(() => res.status(200).json({ message: 'Note ajoutée !' }))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+};

@@ -16,10 +16,13 @@ router.get('/', bookCtrl.getAllBooks);
 router.get('/:id', bookCtrl.getOneBook);
 
 //Modifier un livre
-router.put('/', auth, multer, bookCtrl.modifyBook);
+router.put('/:id', auth, multer, bookCtrl.modifyBook);
 
 //Supprimer un livre
 router.delete('/:id', auth, bookCtrl.deleteBook);
+
+// Ajoute la note à un livre
+router.post('/:id/rating', auth, bookCtrl.addRating);
 
 
 
