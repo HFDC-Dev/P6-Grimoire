@@ -10,3 +10,14 @@ npm start
 Démarrage backend :
 nodemon server
 
+Endpoint de l'API :
+
+Récupère tous les livres : GET /api/books
+Récupère un livre spécifique (par ID) : GET /api/books/:id
+Récupère les livres les mieux notés : GET /api/books/bestrating
+Créer un nouveau livre : POST /api/books
+Mettre à jour un livre : PUT /api/books/:id
+Supprimer un livre : DELETE /api/books/:id
+Noter un livre : POST /api/books/:id/rating
+
+
