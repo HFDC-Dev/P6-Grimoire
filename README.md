@@ -10,10 +10,6 @@ L'API backend de **Mon Vieux Grimoire** permet de gérer une collection de livre
 ## Démarrage backend :
 - nodemon server
 
-Démarrage frontend : npm start  
-Démarrage backend : nodemon server
-
-
 ## Endpoint de l'API :
 
 ### Authentification :
