@@ -12,12 +12,12 @@ L'API backend de **Mon Vieux Grimoire** permet de gérer une collection de livre
 
 ## Endpoint de l'API :
 
-## Authentification :
+### Authentification :
 
  - Crée un nouvel utilisateur : POST /api/auth/signup
  - Connexion : POST /api/auth/login
  
-## Livres :
+### Livres :
 
 - Récupère tous les livres : GET /api/books
 - Récupère un livre spécifique (par ID) : GET /api/books/:id
