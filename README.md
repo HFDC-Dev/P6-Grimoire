@@ -12,6 +12,13 @@ nodemon server
 
 Endpoint de l'API :
 
+Authentification :
+
+ Crée un nouvel utilisateur : POST /api/auth/signup
+ Connexion : POST /api/auth/login
+ 
+Livres :
+
 Récupère tous les livres : GET /api/books
 Récupère un livre spécifique (par ID) : GET /api/books/:id
 Récupère les livres les mieux notés : GET /api/books/bestrating
