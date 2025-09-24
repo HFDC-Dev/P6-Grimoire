@@ -11,6 +11,18 @@ git clone https://github.com/HFDC-Dev/P6-Grimoire.git
 cd P6-Grimoire/backend
 ```
 
+## Installer les dépendances
+```
+npm install
+```
+## Créer le fichier .env
+Créez un fichier .env à la racine du dossier backend avec :
+```
+USER_DB=monUtilisateur
+PASSWORD_DB=monMotDePasse
+CLUSTER_DB=nomDuCluster.mongodb.net
+```
+
 ## Démarrage frontend :
 ```
 cd frontend
