@@ -23,13 +23,13 @@ PASSWORD_DB=monMotDePasse
 CLUSTER_DB=nomDuCluster.mongodb.net
 ```
 
-## Démarrage frontend :
+### Démarrage frontend :
 ```
 cd frontend
 npm start
 ```
 
-## Démarrage backend :
+### Démarrage backend :
 ```
 cd backend
 node server
