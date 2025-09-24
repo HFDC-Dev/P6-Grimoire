@@ -7,7 +7,9 @@ L'API backend de **Mon Vieux Grimoire** permet de gérer une collection de livre
 # Installation
 ## Cloner le projet 
 ```
-
+git clone https://github.com/HFDC-Dev/P6-Grimoire.git
+cd P6-Grimoire/backend
+```
 
 ## Démarrage frontend :
 ```
